@@ -58,5 +58,5 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem 'rubocop'
-gem 'slim-rails'
+gem "rubocop"
+gem "slim-rails"
