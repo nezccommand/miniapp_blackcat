@@ -1,0 +1,50 @@
+head
+  link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"
+
+body
+  .row(style="justify-content: center;")
+    .col-sm-6.col-12
+      .top-wrapper
+        .top-inner-text
+          h1 どれがこむドットコム
+        .swiper-container
+          .swiper-wrapper
+            .swiper-slide
+              img src=image_path('top1.jpg') alt="Image 1"
+            .swiper-slide
+              img src=image_path('top2.jpg')  alt="Image 2"
+            .swiper-slide
+              img src=image_path('top3.jpg')  alt="Image 3"
+            .swiper-slide
+              img src=image_path('top4.jpg')  alt="Image 4"
+            .swiper-slide
+              img src=image_path('top5.jpg')  alt="Image 5"
+          br
+          div style="text-align: center;"
+            p style="font-size: 36px;" 
+              strong 遊び方
+          .centered
+            p 
+              | ・黒猫の画像が4枚表示されるので、その中から🐈こむちゃん🐈
+              strong ではない
+              | 黒猫を選んでください。
+            p
+              | ・🐈こむちゃん🐈の参考資料は、トップページのスライドに掲載しているので、参考にしてください。
+            br
+            = link_to "クイズスタート", "#", class: "btn btn-dark"  
+
+  script src="https://code.jquery.com/jquery-3.6.0.min.js"
+  script src="https://unpkg.com/swiper/swiper-bundle.min.js"
+  script
+    | $(document).ready(function() {
+    |   new Swiper('.swiper-container', {
+    |     loop: true,
+    |     autoplay: {
+    |       delay: 3000,
+    |     },
+    |    slidesPerView: 2,
+    |    spaceBetween: 5,
+    |    slidesPerGroup: 1,
+    |   });
+    | });
+
