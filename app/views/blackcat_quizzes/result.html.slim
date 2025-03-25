@@ -1,0 +1,20 @@
+.row(style="justify-content: center;")
+  .col-sm-6.col-12h2
+    h1 結果発表
+    p あなたの正解数: #{@score}/5
+
+    h2 解説
+    - @answers.each do |answer|
+      - question = Question.find(answer[:question_id])
+      - choice = Choice.find(answer[:choice_id])
+    p 
+    strong 問題:
+    = question.content
+    p 
+    strong あなたの選択:
+    = image_tag choice.image if choice.image.attached?
+    p 
+    strong 解説:
+    = question.explanation
+
+    = link_to "もう一度プレイ", root_path, class: "btn btn-dark"

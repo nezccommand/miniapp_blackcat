@@ -60,3 +60,4 @@ end
 
 gem 'rubocop'
 gem 'slim-rails'
+gem 'mini_magick'
