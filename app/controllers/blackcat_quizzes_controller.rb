@@ -42,7 +42,7 @@ class BlackcatQuizzesController < ApplicationController
 
   def add_or_update_answer(question_id, choice_id, correct)
     existing_answer = session[:answers].find { |answer| answer["question_id"] == question_id }
-  
+
     if existing_answer
       existing_answer[:choice_id] = choice_id
       existing_answer[:correct] = correct
