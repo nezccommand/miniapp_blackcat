@@ -14,29 +14,40 @@ class BlackcatQuizzesController < ApplicationController
   def answer
     @questions = Question.all
     @question = @questions.find(params[:id])
-    Rails.logger.debug "session[:answers]: #{session[:answers]}"
 
     choice = Choice.find(params[:choice_id])
 
-    session[:answers] << { question_id: @question.id, choice_id: choice.id, correct: choice.correct }
+    add_or_update_answer(@question.id, choice.id, choice.correct)
+
     session[:correct_answer_count] += 1 if choice.correct?
-    session[:question_index] += 1
-    if session[:question_index] < 1
-      redirect_to blackcat_quiz_path(session[:question_index])
-    else
+    if session[:question_index] + 1 >= @questions.count
       redirect_to result_blackcat_quiz_path
+    else
+      session[:question_index] += 1
+      redirect_to blackcat_quiz_path(session[:question_index])
     end
   end
 
   def result
     @answers = session[:answers]
     @score = session[:correct_answer_count]
-    logger.debug "Session Answers: #{@answers.inspect}"
+    Rails.logger.debug "Answers: #{@answers}"
   end
 
   private
 
   def set_questions
     @questions = Question.includes(:choices).limit(1)
+  end
+
+  def add_or_update_answer(question_id, choice_id, correct)
+    existing_answer = session[:answers].find { |answer| answer["question_id"] == question_id }
+  
+    if existing_answer
+      existing_answer[:choice_id] = choice_id
+      existing_answer[:correct] = correct
+    else
+      session[:answers] << { question_id: question_id, choice_id: choice_id, correct: correct }
+    end
   end
 end

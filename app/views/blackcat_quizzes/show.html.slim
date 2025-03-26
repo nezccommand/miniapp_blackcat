@@ -1,9 +1,11 @@
 .row(style="justify-content: center;")
   .col-sm-6.col-12h2
-    問題 #{session[:question_index] + 1}/5
+    h2 style="font-size: 2em;" 問題 #{session[:question_index] + 1}
     p= @question.content
 
-    - @question.choices.each do |choice|
-      = form_with url: answer_blackcat_quiz_path(@question), method: :post do
-        = hidden_field_tag :choice_id, choice.id
-        = image_tag choice.image.url, class: "choice-image", onclick: "this.parentNode.submit();" if choice.image.present?
+    - @question.choices.each_slice(2) do |pair|
+      .choice-pair(style="display: flex; justify-content: center; margin-bottom: 20px;")
+        - pair.each do |choice|
+          = form_with url: answer_blackcat_quiz_path(@question), method: :post do
+            = hidden_field_tag :choice_id, choice.id
+            = image_tag choice.image.url, class: "choice-image", onclick: "this.parentNode.submit();" if choice.image.present?
