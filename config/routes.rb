@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root "blackcat_quizzes#top"
-  resources :blackcat_quizzes, only: [ :top, :show ] do
+  resources :blackcat_quizzes, only: [ :show ] do
     member do
       post :answer
       get :result
