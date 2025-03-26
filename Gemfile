@@ -58,7 +58,7 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem 'rubocop'
-gem 'slim-rails'
-gem 'mini_magick'
-gem 'carrierwave'
+gem "rubocop"
+gem "slim-rails"
+gem "mini_magick"
+gem "carrierwave"

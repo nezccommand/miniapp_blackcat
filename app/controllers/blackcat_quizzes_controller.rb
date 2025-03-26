@@ -1,10 +1,10 @@
 class BlackcatQuizzesController < ApplicationController
-  before_action :set_questions, only: [:top, :show]
+  before_action :set_questions, only: [ :top, :show ]
 
   def top
     session[:question_index] = 0
     session[:correct_answer_count] = 0
-    session[:answers] = [] 
+    session[:answers] = []
   end
 
   def show
@@ -15,7 +15,7 @@ class BlackcatQuizzesController < ApplicationController
     @questions = Question.all
     @question = @questions.find(params[:id])
     Rails.logger.debug "session[:answers]: #{session[:answers]}"
-    
+
     choice = Choice.find(params[:choice_id])
 
     session[:answers] << { question_id: @question.id, choice_id: choice.id, correct: choice.correct }
