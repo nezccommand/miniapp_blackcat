@@ -4,7 +4,7 @@ class BlackcatQuizzesController < ApplicationController
   def top
     session[:question_index] = 0
     session[:correct_answer_count] = 0
-    session[:answers] = 0
+    session[:answers] = [] 
   end
 
   def show
@@ -12,13 +12,16 @@ class BlackcatQuizzesController < ApplicationController
   end
 
   def answer
+    @questions = Question.all
     @question = @questions.find(params[:id])
+    Rails.logger.debug "session[:answers]: #{session[:answers]}"
+    
     choice = Choice.find(params[:choice_id])
 
     session[:answers] << { question_id: @question.id, choice_id: choice.id, correct: choice.correct }
     session[:correct_answer_count] += 1 if choice.correct?
     session[:question_index] += 1
-    if session[:question_index] < 2
+    if session[:question_index] < 1
       redirect_to blackcat_quiz_path(session[:question_index])
     else
       redirect_to result_blackcat_quiz_path
@@ -28,6 +31,7 @@ class BlackcatQuizzesController < ApplicationController
   def result
     @answers = session[:answers]
     @score = session[:correct_answer_count]
+    logger.debug "Session Answers: #{@answers.inspect}"
   end
 
   private

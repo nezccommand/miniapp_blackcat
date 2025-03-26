@@ -5,16 +5,17 @@
 
     h2 解説
     - @answers.each do |answer|
-      - question = Question.find(answer[:question_id])
-      - choice = Choice.find(answer[:choice_id])
-    p 
-    strong 問題:
-    = question.content
-    p 
-    strong あなたの選択:
-    = image_tag choice.image if choice.image.attached?
-    p 
-    strong 解説:
-    = question.explanation
+      - question = Question.find(answer['question_id'])
+      - choice = Choice.find(answer['choice_id'])
+      p 
+      strong 問題:
+      = question.content
+      p 
+      strong あなたの選択:
+      br
+      = image_tag choice.image.url, class: "choice-image" if choice.image.present?
+      p 
+      strong 解説:
+      = question.explanation
 
     = link_to "もう一度プレイ", root_path, class: "btn btn-dark"

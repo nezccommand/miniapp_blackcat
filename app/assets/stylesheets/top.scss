@@ -39,3 +39,9 @@
 .centered p {
   margin: 0;
 }
+
+.choice-image {
+  width: 300px;
+  height: 400px;
+  object-fit: cover; /* 画像が縦横比を保ちつつ収まるように */
+}
