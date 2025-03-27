@@ -1,26 +1,35 @@
 .row(style="justify-content: center;")
-  .col-sm-6.col-12h2
-    h1 結果発表
-    p あなたの正解数: #{@score}問正解！/4問中
+  .col-sm-6.col-12h2.text-center
+    h1 🐈結果発表🐈
+    br
 
-    h2 解説
     - @answers.each do |answer|
       - question = Question.find(answer['question_id'])
       - choice = Choice.find(answer['choice_id'])
-      p 
-      strong 問題:
-      = question.id
-      p 
-      strong あなたの選んだ写真:
+      strong style="font-size: 1.5em;"
+        | 問題
+        = question.id
+        - if answer['correct'] == true
+          span style="color: green; margin-left: 10px;" 正解！
+        - else
+          span style="color: red; margin-left: 10px;" 不正解！
+
       br
-      = image_tag choice.image.url, class: "select-image" if choice.image.present?
-      p 
-      strong 正解の写真:
+      div style="display: flex; justify-content: center; align-items: center;"
+        p style="margin-right: 20px;"
+          strong あなたの選んだ写真
+          br
+          = image_tag choice.image.url, class: "select-image" if choice.image.present?
+        p 
+          strong 正解の写真（こむちゃんではない猫）
+          br
+          = image_tag question.correct_image_path, alt: "正解の画像", class: "select-image"
+      strong style="font-size: 1.5em;" 解説
       br
-      = image_tag choice.image.url, class: "select-image"
-      p 
-      strong 解説:
       = question.explanation
+      br
+      br
+
     .centered
       = link_to "もう一度プレイ", "#", id: "retry-button", class: "btn btn-dark"
-      br
+    br

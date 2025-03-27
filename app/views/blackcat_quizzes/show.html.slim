@@ -1,7 +1,14 @@
 .row(style="justify-content: center;")
-  .col-sm-6.col-12h2
-    h2 style="font-size: 2em;" 問題 #{session[:question_index] + 1}
-    p= @question.content
+  .col-sm-6.col-12h2.text-center
+    h2 style="font-size: 2em;" 🐈問題#{session[:question_index] + 1}🐈
+    br
+    strong style="font-size: 1.5em;"
+      | 次の4枚の写真から、こむちゃんではない猫を選んでください
+    p
+      br
+      | 4枚の写真がありますが、3枚はこむちゃん、1枚が違う猫の写真です
+      br
+      | 写真をクリックするとそれが回答になりますので、注意してください🐈
 
     - @question.choices.each_slice(2) do |pair|
       .choice-pair(style="display: flex; justify-content: center; margin-bottom: 20px;")
