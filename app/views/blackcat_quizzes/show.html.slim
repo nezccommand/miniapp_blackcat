@@ -15,4 +15,4 @@
         - pair.each do |choice|
           = form_with url: answer_blackcat_quiz_path(@question), method: :post do
             = hidden_field_tag :choice_id, choice.id
-            = image_tag choice.image.url, class: "choice-image", onclick: "this.parentNode.submit();" if choice.image.present?
+            = image_tag choice.image, class: "choice-image", onclick: "this.parentNode.submit();" if choice.image.present?
