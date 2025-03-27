@@ -4,7 +4,7 @@ class BlackcatQuizzesController < ApplicationController
   def top
     session[:question_index] = 0
     session[:answers] = []
-    Rails.logger.debug "Session reset: question_index=#{session[:question_index]}, answers=#{session[:answers]}"
+    # Rails.logger.debug "Session reset: question_index=#{session[:question_index]}, answers=#{session[:answers]}"
   end
 
   def show
@@ -30,7 +30,7 @@ class BlackcatQuizzesController < ApplicationController
 
   def result
     @answers = session[:answers]
-    Rails.logger.debug "Session Answers in result: #{@answers.inspect}"
+    # Rails.logger.debug "Session Answers in result: #{@answers.inspect}"
   end
 
   private
