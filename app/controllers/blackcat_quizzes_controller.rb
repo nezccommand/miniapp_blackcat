@@ -3,8 +3,8 @@ class BlackcatQuizzesController < ApplicationController
 
   def top
     session[:question_index] = 0
-    session[:correct_answer_count] = 0
     session[:answers] = []
+    Rails.logger.debug "Session reset: question_index=#{session[:question_index]}, answers=#{session[:answers]}"
   end
 
   def show
@@ -18,36 +18,40 @@ class BlackcatQuizzesController < ApplicationController
     choice = Choice.find(params[:choice_id])
 
     add_or_update_answer(@question.id, choice.id, choice.correct)
+    next_question_index = @questions.index(@question) + 1
 
-    session[:correct_answer_count] += 1 if choice.correct?
-    if session[:question_index] + 1 >= @questions.count
+    if next_question_index >= @questions.count
       redirect_to result_blackcat_quiz_path
     else
-      session[:question_index] += 1
+      session[:question_index] = next_question_index
       redirect_to blackcat_quiz_path(session[:question_index])
     end
   end
 
   def result
     @answers = session[:answers]
-    @score = session[:correct_answer_count]
-    Rails.logger.debug "Answers: #{@answers}"
+    Rails.logger.debug "Session Answers in result: #{@answers.inspect}"
   end
 
   private
 
   def set_questions
-    @questions = Question.includes(:choices).limit(1)
+    @questions = Question.includes(:choices).order(:id)
   end
 
   def add_or_update_answer(question_id, choice_id, correct)
-    existing_answer = session[:answers].find { |answer| answer["question_id"] == question_id }
+    updated = false
+    session[:answers] = session[:answers].map do |answer|
+      if answer["question_id"] == question_id
+        updated = true
+        { question_id: question_id, choice_id: choice_id, correct: correct }
+      else
+        answer
+      end
+    end
 
-    if existing_answer
-      existing_answer[:choice_id] = choice_id
-      existing_answer[:correct] = correct
-    else
-      session[:answers] << { question_id: question_id, choice_id: choice_id, correct: correct }
+    unless updated
+      session[:answers] << { "question_id" => question_id, "choice_id" => choice_id, "correct" => correct }
     end
   end
 end
