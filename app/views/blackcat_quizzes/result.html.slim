@@ -2,6 +2,18 @@
   .col-sm-6.col-12h2.text-center
     h1 🐈結果発表🐈
     br
+    strong style="font-size: 1.8em;"
+      | あなたの正解数
+      br
+      = @answers.count { |answer| answer['correct'] == true }
+      | 問/
+      = @answers.size
+      | 問中
+    br
+    - if @answers.count { |answer| answer['correct'] == true } == @answers.size
+      span あなたはこむちゃんマイスターです🎉✨
+    br
+    br
 
     - @answers.each do |answer|
       - question = Question.find(answer['question_id'])
@@ -24,12 +36,13 @@
           strong 正解の写真（こむちゃんではない猫）
           br
           = image_tag question.correct_image_path, alt: "正解の画像", class: "select-image"
-      strong style="font-size: 1.5em;" 解説
+      strong style="font-size: 1.3em;" 解説
       br
       = question.explanation
       br
       br
+      br
 
     .centered
-      = link_to "もう一度プレイ", "#", id: "retry-button", class: "btn btn-dark"
+      = link_to "トップページへ", "#", id: "retry-button", class: "btn btn-dark"
     br
