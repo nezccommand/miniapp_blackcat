@@ -36,4 +36,4 @@ choices = Choice.create!([
   { question: questions[2], image: "choice3_4.jpg", correct: false }
 ])
 
-puts "✅ Questions and Choices seeded successfully!"
+puts "✅問題が登録されました"

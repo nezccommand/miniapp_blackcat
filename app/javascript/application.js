@@ -6,8 +6,10 @@ import * as bootstrap from "bootstrap"
 //= require swiper.js
 
 document.addEventListener('DOMContentLoaded', function() {
-  const retryButton = document.getElementById('retry-button');
-  retryButton.addEventListener('click', function() {
-    window.location.href = '/'; // トップページにリダイレクト
+  const retryButtons = document.querySelectorAll('.retry-button');
+  retryButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      window.location.href = '/';
+    });
   });
 });

@@ -1,7 +1,7 @@
 = content_for(:title, '結果発表')
 .row(style="justify-content: center;")
   .col-sm-6.col-12h2.text-center
-    h1 🐈結果発表🐈
+    h1 style="font-size: 36px;" 🐈結果発表🐈
     br
     strong style="font-size: 1.8em;"
       | あなたの正解数
@@ -12,7 +12,7 @@
       | 問中
     br
     - if @answers.count { |answer| answer['correct'] == true } == @answers.size
-      span あなたはこむちゃんマイスターです🎉✨
+      span ✨🎉あなたはこむちゃんマイスターです🎉✨
     br
     br
 
@@ -45,5 +45,5 @@
       br
 
     .centered
-      = link_to "トップページへ", "#", id: "retry-button", class: "btn btn-dark"
+      = link_to "トップページへ", "#", class: "btn btn-dark retry-button"
     br
