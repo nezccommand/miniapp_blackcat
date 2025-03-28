@@ -36,18 +36,7 @@ body
               | ・トップページまでブラウザバックした時、上手く表示されない場合がありますので、一度画面をリロードするか、左上のロゴをクリックしてください
           br
           div style="text-align: center;"
-            = link_to "クイズスタート", blackcat_quiz_path(0), class: "btn btn-dark"  
+            = link_to "クイズスタート", blackcat_quiz_path(0), class: "btn btn-dark", data: { reload: "true" }
 
   script src="https://code.jquery.com/jquery-3.6.0.min.js"
   script src="https://unpkg.com/swiper/swiper-bundle.min.js"
-  script
-    | $(document).ready(function() {
-    |   new Swiper('.swiper-container', {
-    |     loop: true,
-    |     autoplay: {
-    |       delay: 3000,
-    |     },
-    |    slidesPerView: 2,
-    |    slidesPerGroup: 1,
-    |   });
-    | });
