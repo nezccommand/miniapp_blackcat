@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
   const retryButton = document.getElementById('retry-button');
   if (retryButton) {
     retryButton.addEventListener('click', function() {
-      window.location.href = '/'; // トップページに強制リダイレクト
+      window.location.href = '/';
     });
   }
 });
@@ -19,11 +19,10 @@ document.addEventListener('DOMContentLoaded', function() {
   
   if (quizStartButton) {
     quizStartButton.addEventListener('click', function(event) {
-      // リダイレクト後にページをリロードする処理
-      event.preventDefault();  // デフォルトの遷移をキャンセル
-      window.location.href = this.href;  // リダイレクト後、リロードする
+      event.preventDefault();
+      window.location.href = this.href;
       setTimeout(function() {
-        location.reload();  // 1秒後にリロード
+        location.reload();
       }, 1000);
     });
   }
@@ -37,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
-  // Swiper 初期化
   const swiper = new Swiper('.swiper-container', {
     loop: true,
     autoplay: {
