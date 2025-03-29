@@ -1,0 +1,21 @@
+databases:
+  - name: どれがこむドットコム_db
+    databaseName: doregakomudotsutokomu_db
+    user: どれがこむドットコム
+    region: singapore
+
+services:
+  - type: web
+    name: どれがこむドットコム
+    env: ruby
+    region: singapore
+    plan: free
+    buildCommand: "./bin/render-build.sh"
+    startCommand: "bundle exec puma -C config/puma.rb"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: どれがこむドットコム_db
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
