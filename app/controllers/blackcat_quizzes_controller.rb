@@ -53,3 +53,4 @@ class BlackcatQuizzesController < ApplicationController
     end
   end
 end
+# 並び替えゲームを作る
