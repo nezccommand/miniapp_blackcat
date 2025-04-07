@@ -1,0 +1,49 @@
+= content_for(:title, '結果発表')
+.row(style="justify-content: center;")
+  .col-sm-6.col-12h2.text-center
+    h1 🐈結果発表🐈
+    br
+    strong style="font-size: 1.8em;"
+      | あなたの正解数
+      br
+      = @answers.count { |answer| answer['correct'] == true }
+      | 問/
+      = @answers.size
+      | 問中
+    br
+    - if @answers.count { |answer| answer['correct'] == true } == @answers.size
+      span 素晴らしい結果です！あなたはこむちゃんを知り尽くしています🎉✨
+    br
+    br
+
+    - @answers.each do |answer|
+      - question = Question.find(answer['question_id'])
+      - choice = Choice.find(answer['choice_id'])
+      strong style="font-size: 1.5em;"
+        | 問題
+        = question.id
+        - if answer['correct'] == true
+          span style="color: green; margin-left: 10px;" 正解！
+        - else
+          span style="color: red; margin-left: 10px;" 不正解！
+
+      br
+      div style="display: flex; justify-content: center; align-items: center;"
+        p style="margin-right: 20px;"
+          strong あなたの選んだ写真
+          br
+          = image_tag choice.image_path, class: "select-image" if choice.image.present?
+        p 
+          strong 正解の写真（こむちゃんではない猫）
+          br
+          = image_tag question.correct_image_path, alt: "正解の画像", class: "select-image"
+      strong style="font-size: 1.3em;" 解説
+      br
+      = question.explanation
+      br
+      br
+      br
+
+    .centered
+      = link_to "トップページへ", "#", id: "result-retry-button", class: "btn btn-dark"
+    br
