@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_27_014658) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_07_024945) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -20,6 +20,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_27_014658) do
     t.datetime "updated_at", null: false
     t.integer "question_id", null: false
     t.string "image"
+    t.integer "difficult_question_id"
+  end
+
+  create_table "difficult_questions", force: :cascade do |t|
+    t.string "content"
+    t.text "explanation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "correct_image"
   end
 
   create_table "questions", force: :cascade do |t|
@@ -41,6 +50,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_27_014658) do
     t.index ["question_id"], name: "index_user_answer_maps_on_question_id"
   end
 
+  add_foreign_key "choices", "difficult_questions"
   add_foreign_key "choices", "questions"
   add_foreign_key "user_answer_maps", "choices"
   add_foreign_key "user_answer_maps", "questions"
