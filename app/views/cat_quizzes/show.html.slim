@@ -1,0 +1,21 @@
+= content_for(:title, "初級：問題#{session[:easy_question_index] + 1}")
+.row(style="justify-content: center;")
+  .col-sm-6.col-12h2.text-center
+    h2 style="font-size: 36px;" 🐈問題#{session[:easy_question_index] + 1}🐈
+    br
+    strong style="font-size: 1.5em;"
+      | 次の4枚の写真から、こむちゃんではない猫を選んでください
+    p
+      br
+      | 下に2枚の写真がありますが、1枚がこむちゃん、もう1枚が違う猫の写真です
+    strong
+      | 【🐈注意🐈】こむちゃんを選ぶと不正解になってしまうので、注意してください
+    p
+      | 写真をクリックすると回答となり次の問題に進みますので、よく考えて選択してください🐈
+
+    - @easy_question.choices.shuffle.each_slice(2) do |pair|
+      .choice-pair(style="display: flex; justify-content: center; margin-bottom: 20px;")
+        - pair.each do |choice|
+          = form_with url: answer_cat_quiz_path(@easy_question), method: :post do
+            = hidden_field_tag :choice_id, choice.id
+            = image_tag choice.image_path, class: "choice-image", onclick: "this.parentNode.submit();" if choice.image.present?

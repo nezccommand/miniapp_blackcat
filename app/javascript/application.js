@@ -15,6 +15,20 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
+  const quizStartButton = document.querySelector('a[data-load="true"]');
+  
+  if (quizStartButton) {
+    quizStartButton.addEventListener('click', function(event) {
+      event.preventDefault();
+      window.location.href = this.href;
+      setTimeout(function() {
+        location.reload();
+      }, 1000);
+    });
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
   const quizStartButton = document.querySelector('a[data-reload="true"]');
   
   if (quizStartButton) {

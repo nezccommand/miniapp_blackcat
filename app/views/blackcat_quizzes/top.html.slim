@@ -34,13 +34,16 @@ body
               | （うちの猫を見てほしいだけのクイズなので、このような選択肢を採用しています）
             p
               | ・🐈こむちゃん🐈の参考資料は、トップページのスライドに掲載しているので、参考にしてください。
-            strong
-              | ・トップページまでブラウザバックした時、上手く表示されない場合がありますので、一度画面をリロードするか、左上のロゴをクリックしてください
+            p
+              | ・難易度は初級から上級まで三種類あります。気軽に回答してみてください🐈
           br
           div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;"
-            button.btn.btn-light disabled=true 初級問題(準備中)
-            = link_to "中級問題をスタート", blackcat_quiz_path(0), class: "btn btn-secondary", data: { reload: "true" }
-            = link_to "上級問題をスタート", komkomcat_quiz_path(0), class: "btn btn-dark", data: { rereload: "true" }
+            div style="border: 2px solid black; display: inline-block; border-radius: 10px;"
+              = link_to "初級問題を解いてみる", cat_quiz_path(0), class: "btn btn-light", data: { load: "true" }
+            div style="border: 2px solid black; display: inline-block; border-radius: 10px;"
+              = link_to "中級問題を解いてみる", blackcat_quiz_path(0), class: "btn btn-secondary", data: { reload: "true" }
+            div style="border: 2px solid black; display: inline-block; border-radius: 10px;"
+              = link_to "上級問題を解いてみる", komkomcat_quiz_path(0), class: "btn btn-dark", data: { rereload: "true" }
 
   script src="https://code.jquery.com/jquery-3.6.0.min.js"
   script src="https://unpkg.com/swiper@11.2.6/swiper-bundle.min.js"
