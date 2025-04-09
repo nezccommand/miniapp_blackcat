@@ -48,6 +48,31 @@ difficult_questions = difficult_questions.map do |q|
   end
 end
 
+easy_questions = [
+  {
+    content: "1問目です",
+    explanation: "こむちゃんはハチワレさんではありません。",
+    correct_image: "choice7_1.jpg"
+  },
+  {
+    content: "2問目です",
+    explanation: "一見難しい問題ですが、トップページのスライドがヒントです！",
+    correct_image: "choice8_2.jpg"
+  },
+  {
+    content: "3問目です",
+    explanation: "万が一こむちゃんが外に出て海を見ていたら、そのまま水の中にドボンしないか心配です。",
+    correct_image: "choice9_2.jpg"
+  }
+]
+
+easy_questions = easy_questions.map do |q|
+  EasyQuestion.find_or_create_by(content: q[:content]) do |question|
+    question.explanation = q[:explanation]
+    question.correct_image = q[:correct_image]
+  end
+end
+
 
 choices = [
   { question: questions[0], image: "choice1_1.jpg", correct: false },
@@ -99,7 +124,25 @@ dif_choices.each do |choice|
   c = Choice.find_or_create_by(difficult_question_id: choice[:difficult_question].id, image: choice[:image]) do |new_choice|
     new_choice.correct = choice[:correct]
   end
-  puts "Choice created: #{c.inspect}"
+end
+
+easy_choices = [
+  { easy_question: easy_questions[0], image: "choice7_1.jpg", correct: true },
+  { easy_question: easy_questions[0], image: "choice7_2.jpg", correct: false },
+
+
+  { easy_question: easy_questions[1], image: "choice8_1.jpg", correct: false },
+  { easy_question: easy_questions[1], image: "choice8_2.jpg", correct: true },
+
+
+  { easy_question: easy_questions[2], image: "choice9_1.jpg", correct: false },
+  { easy_question: easy_questions[2], image: "choice9_2.jpg", correct: true }
+]
+
+easy_choices.each do |choice|
+  c = Choice.find_or_create_by(easy_question_id: choice[:easy_question].id, image: choice[:image]) do |new_choice|
+    new_choice.correct = choice[:correct]
+  end
 end
 
 puts "✅問題が登録されました"
