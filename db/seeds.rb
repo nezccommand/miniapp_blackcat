@@ -96,9 +96,10 @@ dif_choices = [
 ]
 
 dif_choices.each do |choice|
-  Choice.find_or_create_by(difficult_question: choice[:difficult_question], image: choice[:image]) do |c|
-    c.correct = choice[:correct]
+  c = Choice.find_or_create_by(difficult_question_id: choice[:difficult_question].id, image: choice[:image]) do |new_choice|
+    new_choice.correct = choice[:correct]
   end
+  puts "Choice created: #{c.inspect}"
 end
 
 puts "✅問題が登録されました"
