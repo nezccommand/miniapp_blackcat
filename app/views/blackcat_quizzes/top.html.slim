@@ -38,7 +38,7 @@ body
           div style="display: flex; justify-content: center; gap: 20px; margin-top: 20px;"
             button.btn.btn-light disabled=true 初級問題(準備中)
             = link_to "中級問題をスタート", blackcat_quiz_path(0), class: "btn btn-secondary", data: { reload: "true" }
-            = link_to "上級問題をスタート", komkomcat_quiz_path(0), class: "btn btn-dark", data: { reload: "true" }
+            = link_to "上級問題をスタート", komkomcat_quiz_path(0), class: "btn btn-dark", data: { rereload: "true" }
 
   script src="https://code.jquery.com/jquery-3.6.0.min.js"
   script src="https://unpkg.com/swiper@11.2.6/swiper-bundle.min.js"

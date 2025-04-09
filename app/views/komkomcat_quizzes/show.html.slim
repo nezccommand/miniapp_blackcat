@@ -13,9 +13,18 @@
       br
       | 写真をクリックすると回答となり次の問題に進みますので、よく考えて選択してください🐈
 
-    - @difficult_question.choices.shuffle.each_slice(2) do |pair|
+    - shuffled_choices = @difficult_question.choices[0..4].shuffle
+    - last_choice = @difficult_question.choices[5]
+
+    - shuffled_choices[0..3].each_slice(2) do |pair|
       .choice-pair(style="display: flex; justify-content: center; margin-bottom: 20px;")
         - pair.each do |choice|
           = form_with url: answer_komkomcat_quiz_path(@difficult_question), method: :post do
             = hidden_field_tag :choice_id, choice.id
             = image_tag choice.image_path, class: "choice-image", onclick: "this.parentNode.submit();" if choice.image.present?
+
+    .choice-pair(style="display: flex; justify-content: center; margin-bottom: 20px;")
+      - [shuffled_choices[4], last_choice].each do |choice|
+        = form_with url: answer_komkomcat_quiz_path(@difficult_question), method: :post do
+          = hidden_field_tag :choice_id, choice.id
+          = image_tag choice.image_path, class: "choice-image", onclick: "this.parentNode.submit();" if choice.image.present?
