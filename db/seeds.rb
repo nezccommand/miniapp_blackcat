@@ -51,7 +51,7 @@ end
 easy_questions = [
   {
     content: "1問目です",
-    explanation: "こむちゃんはハチワレさんではありません。でもハチワレさんにも憧れています。",
+    explanation: "こむちゃんはハチワレさんではありません。",
     correct_image: "choice7_1.jpg"
   },
   {

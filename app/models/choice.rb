@@ -12,7 +12,7 @@ class Choice < ApplicationRecord
   private
 
   def must_belong_to_only_one_question_type
-    attached_ids = [question_id, difficult_question_id, easy_question_id].compact
+    attached_ids = [ question_id, difficult_question_id, easy_question_id ].compact
 
     if attached_ids.empty?
       errors.add(:base, "question_id、difficult_question_id、easy_question_id のいずれか1つが必要です")
