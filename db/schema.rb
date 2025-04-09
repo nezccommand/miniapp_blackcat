@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_04_07_031408) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_09_112043) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -21,6 +21,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_07_031408) do
     t.integer "question_id"
     t.string "image"
     t.integer "difficult_question_id"
+    t.integer "easy_question_id"
   end
 
   create_table "difficult_questions", force: :cascade do |t|
@@ -29,6 +30,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_07_031408) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "correct_image"
+  end
+
+  create_table "easy_questions", force: :cascade do |t|
+    t.string "content"
+    t.text "explanation"
+    t.string "correct_image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "questions", force: :cascade do |t|
@@ -51,6 +60,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_04_07_031408) do
   end
 
   add_foreign_key "choices", "difficult_questions"
+  add_foreign_key "choices", "easy_questions"
   add_foreign_key "choices", "questions"
   add_foreign_key "user_answer_maps", "choices"
   add_foreign_key "user_answer_maps", "questions"
