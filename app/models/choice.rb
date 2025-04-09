@@ -1,6 +1,6 @@
 class Choice < ApplicationRecord
-  belongs_to :question, dependent: :destroy
-  belongs_to :difficult_question, dependent: :destroy
+  belongs_to :question, dependent: :destroy, optional: true
+  belongs_to :difficult_question, dependent: :destroy, optional: true
 
   def image_path
     image.present? ? ActionController::Base.helpers.asset_path(image) : nil

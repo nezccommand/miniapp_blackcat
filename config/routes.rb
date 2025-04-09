@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :komkomcat_quizzes, only: [:show] do
+  resources :komkomcat_quizzes, only: [ :show ] do
     member do
       post :answer
       get :result

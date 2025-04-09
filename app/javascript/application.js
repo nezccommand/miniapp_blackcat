@@ -29,6 +29,20 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 document.addEventListener('DOMContentLoaded', function() {
+  const quizStartButton = document.querySelector('a[data-rereload="true"]');
+  
+  if (quizStartButton) {
+    quizStartButton.addEventListener('click', function(event) {
+      event.preventDefault();
+      window.location.href = this.href;
+      setTimeout(function() {
+        location.reload();
+      }, 1000);
+    });
+  }
+});
+
+document.addEventListener('DOMContentLoaded', function() {
   const retryButton = document.getElementById('result-retry-button');
   retryButton.addEventListener('click', function() {
     window.location.href = '/';

@@ -4,6 +4,8 @@ class BlackcatQuizzesController < ApplicationController
   def top
     session[:question_index] = 0
     session[:answers] = []
+    session[:dif_question_index] = 0
+    session[:dif_answers] = []
   end
 
   def show

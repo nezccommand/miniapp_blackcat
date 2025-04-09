@@ -17,7 +17,7 @@
     br
 
     - @answers.each do |answer|
-      - question = Question.find(answer['question_id'])
+      - question = DifficultQuestion.find(answer['question_id'])
       - choice = Choice.find(answer['choice_id'])
       strong style="font-size: 1.5em;"
         | 問題
