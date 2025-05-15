@@ -20,18 +20,23 @@
     border-radius: 5px; 
 
     @media screen and (max-width: 767px) {
-      font-size: 2rem;
+      display: none;
     }
   }
 }
 
 .swiper-container {
-    img {
-      width: 400px;
+  img {
+    width: 400px;
+    height: 100%;
+    object-fit: cover;
+
+    @media screen and (max-width: 768px) {
+      width: 150px;
       height: 100%;
-      object-fit: cover;
     }
   }
+}
   
 .centered p {
   margin-left: 0;
@@ -47,15 +52,34 @@
   object-fit: cover;
   margin: 0 10px;
   transition: transform 0.3s, box-shadow 0.3s;
-}
 
-.choice-image:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+    margin: 0 10px;
+    transition: transform 0.3s, box-shadow 0.3s;
+
+    &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  }
+  }
 }
 
 .select-image {
   width: 300px;
   height: 400px;
   object-fit: cover;
+
+  @media screen and (max-width: 768px) {
+    width: 150px;
+    height: 200px;
+    object-fit: cover;
+  }
 }
