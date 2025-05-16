@@ -47,3 +47,7 @@ body
 
   script src="https://code.jquery.com/jquery-3.6.0.min.js"
   script src="https://unpkg.com/swiper@11.2.6/swiper-bundle.min.js"
+  script type="text/javascript"
+    | document.addEventListener("DOMContentLoaded", function() {
+    |   fetch("/warmup", { method: "GET" });
+    | });
