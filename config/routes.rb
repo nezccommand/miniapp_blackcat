@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   root "blackcat_quizzes#top"
+  get "/warmup", to: "warmup#index"
   resources :blackcat_quizzes, only: [ :show ] do
     member do
       post :answer
