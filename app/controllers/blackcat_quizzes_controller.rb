@@ -1,5 +1,5 @@
 class BlackcatQuizzesController < ApplicationController
-  before_action :set_questions, only: [:show, :answer]
+  before_action :set_questions, only: [ :show, :answer ]
 
   def top
     session[:question_index] = 0
