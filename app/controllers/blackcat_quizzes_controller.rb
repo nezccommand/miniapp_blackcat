@@ -1,5 +1,5 @@
 class BlackcatQuizzesController < ApplicationController
-  before_action :set_questions, only: [ :show ]
+  before_action :set_questions, only: [:show, :answer]
 
   def top
     session[:question_index] = 0
@@ -15,14 +15,13 @@ class BlackcatQuizzesController < ApplicationController
   end
 
   def answer
-    @questions = Question.all
     @question = @questions.find(params[:id])
-
     choice = Choice.find(params[:choice_id])
 
-    add_or_update_answer(@question.id, choice.id, choice.correct)
-    next_question_index = @questions.index(@question) + 1
+    question_index = @questions.index(@question)
+    add_or_update_answer(question_index, @question.id, choice.id, choice.correct)
 
+    next_question_index = question_index + 1
     if next_question_index >= @questions.count
       redirect_to result_blackcat_quiz_path
     else
@@ -41,20 +40,13 @@ class BlackcatQuizzesController < ApplicationController
     @questions = Question.includes(:choices).order(:id)
   end
 
-  def add_or_update_answer(question_id, choice_id, correct)
-    updated = false
-    session[:answers] = session[:answers].map do |answer|
-      if answer["question_id"] == question_id
-        updated = true
-        { question_id: question_id, choice_id: choice_id, correct: correct }
-      else
-        answer
-      end
-    end
-
-    unless updated
-      session[:answers] << { "question_id" => question_id, "choice_id" => choice_id, "correct" => correct }
-    end
+  def add_or_update_answer(index, question_id, choice_id, correct)
+    session[:answers] ||= []
+    session[:answers][index] = {
+      "question_id" => question_id,
+      "choice_id" => choice_id,
+      "correct" => correct
+    }
   end
 end
 # 並び替えゲームを作る
